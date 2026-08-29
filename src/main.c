@@ -31,6 +31,29 @@ const int dailyPatientCap[4] = {
     10
 };
 
+//Hospital ward lookup data
+const int wardID[4] = {1, 2, 3, 4};
+
+const char wardName[4][30] = {
+    "General Ward", 
+    "Paediatric Ward",
+    "Surgical Ward", 
+    "ICU (Intensive Care Unit)"
+};
+
+const double dailyBedRate[4] = {
+    3000.00,
+    6000.00,
+    12000.00,
+    25000.00
+};
+const int bedCapacity[4] = {
+    20,
+    10,
+    10,
+    05
+};
+
 int main(void)
 {
     printf("Smart Hospital & Resource Allocation System\n");
