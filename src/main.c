@@ -89,10 +89,36 @@ void displaySpecialties(void){
 }
 
 
+//Display hospital wards
+void displayWards(void){
+    char row1[20] = "ID";
+    char row2[20] = "Ward Name";
+    char row3[20] = "Daily Bed Rate";
+    char row4[20] = "Bed Capacity";
+
+    printf("\n\n\nHOSPITAL WARDS\n");
+    printf("--------------------------------------------------------------------------\n");
+    printf("%-4s %-28s %-24s %-14s\n", row1, row2, row3, row4);
+    printf("--------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%-4d %-28s Rs. %-24.2f %d\n",
+               wardID[i],
+               wardName[i],
+               dailyBedRate[i],
+               bedCapacity[i]);
+    }
+
+    printf("--------------------------------------------------------------------------\n");
+}
+
+
 int main(void)
 {
     printf("Smart Hospital & Resource Allocation System\n");
     displaySpecialties();
+    displayWards();
 
     return 0;
 }
