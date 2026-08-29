@@ -54,6 +54,11 @@ const int bedCapacity[4] = {
     05
 };
 
+// Bed occupancy tracking
+// 0 = Available
+// 1 = Occupied
+int bedOccupancy[4][20] = {0}; //initially set all beds available
+
 int main(void)
 {
     printf("Smart Hospital & Resource Allocation System\n");
