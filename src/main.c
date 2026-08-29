@@ -114,11 +114,43 @@ void displayWards(void){
 }
 
 
+//Display bed availability
+void displayBedAvailability(void)
+{
+    printf("\n\n\nBED AVAILABILITY\n");
+    printf("-------------------------------------------------------------\n");
+    printf("%-28s %-12s %-12s\n","Ward", "Capacity", "Available");
+    printf("-------------------------------------------------------------\n");
+
+    for (int i = 0; i < 4; i++)
+    {
+        int availableBeds = 0;
+
+        for (int j = 0; j < bedCapacity[i]; j++)
+        {
+            if (bedOccupancy[i][j] == 0)
+            {
+                availableBeds++;
+            }
+        }
+
+        printf("%-28s %-12d %-12d\n",
+               wardName[i],
+               bedCapacity[i],
+               availableBeds);
+    }
+
+    printf("-------------------------------------------------------------\n");
+}
+
+
+
 int main(void)
 {
     printf("Smart Hospital & Resource Allocation System\n");
     displaySpecialties();
     displayWards();
+    displayBedAvailability();
 
     return 0;
 }
