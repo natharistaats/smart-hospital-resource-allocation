@@ -79,15 +79,31 @@ int patientWard[MAX_PATIENTS];
 int daysAdmitted[MAX_PATIENTS];
 int assignedBed[MAX_PATIENTS];
 
+//billing data
+double waitingTime[MAX_PATIENTS];
+double emergencySurcharge[MAX_PATIENTS];
+double wardCost[MAX_PATIENTS];
+double totalGross[MAX_PATIENTS];
+double discount[MAX_PATIENTS];
+double finalPayable[MAX_PATIENTS];
+
 int patientCount = 0;
 
 //function prototypes
 void displaySpecialties(void);
 void displayWards(void);
 void displayBedAvailability(void);
-
 void patientIDgenerator(int index);
 void registerPatient(int *patientCount);
+
+double calculatingWaitingTime(int specialtyIndex);
+double calculatingEmergencySurcharge(double basefee, int urgency);
+double calculatingWardCost(int wardIndex, int days);
+double calculatingTotalGross(double consultationFee, double surcharge, double wardCost);
+double calculatingSusidyDiscount(double gross, int age);
+
+void calculatingBilling(int index);
+void displayPatientBill(int index);
 
 
 //Display doctor specialties
@@ -207,6 +223,11 @@ double calculatingWardCost(int wardIndex, int days){
     return days * dailyBedRate[wardIndex];
 }
 
+//calculating total gross
+double calculatingTotalGross(double consultaionFee, double surcharge, double wardCost){
+    return consultaionFee + surcharge + wardCost;
+}
+
 
 //calculating age subsidy discount
 double calculatingSubsidyDiscount(double gross, int age){
@@ -217,6 +238,40 @@ double calculatingSubsidyDiscount(double gross, int age){
     return 0.0;
 }
 
+//===========================================================================================================
+//calculating complete patient bill
+void calculateBill(int index){
+    int speicaltyIndex;
+    int wardIndex;
+
+    speicaltyIndex = specialtyRequested[index] - 1;
+
+    //waiting time
+    waitingTime[index] = calculatingWaitingTime(speicaltyIndex);
+
+    //emergency surcharge
+    emergencySurcharge[index] = calculatingEmergencySurcharge(baseFee[speicaltyIndex], urgencyLevel[index]);
+
+    //ward cost
+    if(isAdmitted[index] == 1){
+        wardIndex = patientWard[index] - 1;
+
+        wardCost[index] = calculatingWardCost(wardIndex, daysAdmitted[index]);
+
+    } else{
+        wardCost[index] = 0.0;
+    }
+
+    // total gross
+    totalGross[index] = calculatingTotalGross(baseFee[speicaltyIndex], emergencySurcharge[index], wardCost[index]);
+
+    //age subsidy
+    discount[index] = calculatingSubsidyDiscount(totalGross[index], patientAge[index]);
+
+    //final payable amount
+    finalPayable[index] = totalGross[index] - discount[index];
+
+}
 
 
 //register patient inputss
