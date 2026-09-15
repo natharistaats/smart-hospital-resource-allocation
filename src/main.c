@@ -176,6 +176,48 @@ void patientIDgenerator(int index){
 }
 
 
+//Calculating waiting time
+double calculatingWaitingTime(int specialtyIndex){
+    return specialtyQcount[specialtyIndex] * consultationTime[specialtyIndex];
+
+}
+
+//calculating emergency surcharge
+double calculatingEmergencySurcharge(double basefee, int urgency){
+    if (urgency == 1){
+        return 0.0;
+    }
+    else if(urgency == 2){
+        return basefee * 0.20;
+    }
+    else if(urgency == 3){
+        return basefee * 0.50;
+    }
+
+    return 0.0;
+}
+
+
+//calculating ward cost
+double calculatingWardCost(int wardIndex, int days){
+    if(wardIndex == -1 || days <= 0){
+        return 0.0;
+    }
+
+    return days * dailyBedRate[wardIndex];
+}
+
+
+//calculating age subsidy discount
+double calculatingSubsidyDiscount(double gross, int age){
+    if(age < 5 || age > 65){
+        return gross * 0.15;
+    }
+
+    return 0.0;
+}
+
+
 
 //register patient inputss
 void registerPatient(int *patientCount){
@@ -189,7 +231,7 @@ void registerPatient(int *patientCount){
     patientIDgenerator(*patientCount);
 
     printf("Enter Patient Name: ");
-    scanf(" %[^\n]", patientName[*patientCount]);
+    scanf(" %49[^\n]", patientName[*patientCount]);
 
     do
     {
@@ -260,7 +302,7 @@ specialtyRequested[*patientCount] = specialtyChoice;
     } while (isAdmitted[*patientCount] != 0 && isAdmitted[*patientCount] != 1);
 
 
-    if(isAdmitted == 1){
+    if(isAdmitted[*patientCount] == 1){
         int wardChoice;
         int wardIndex;
         int assignedBedIndex = -1;
@@ -304,7 +346,7 @@ specialtyRequested[*patientCount] = specialtyChoice;
         do
         {
             printf("Enter Number of days admitted: ");
-            scanf("%d", daysAdmitted[*patientCount]);
+            scanf("%d", &daysAdmitted[*patientCount]);
 
             if(daysAdmitted[*patientCount] <= 0){
                 printf("Invalid. Days admitted must be greater than 0.\n");
@@ -326,6 +368,7 @@ specialtyRequested[*patientCount] = specialtyChoice;
     printf("\nPatient successfully registered.\n");
 
 }
+
 
 
 int main(void)
