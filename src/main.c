@@ -105,6 +105,7 @@ double calculatingSubsidyDiscount(double gross, int age);
 void calculatingBill(int index);
 void displayPatientBill(int index);
 void findPatient(void);
+void displayPatientsByPriority(void);
 
 
 //Display doctor specialties
@@ -512,7 +513,7 @@ specialtyRequested[*patientCount] = specialtyChoice;
 
 }
 
-//Patient lookup menu 
+//Patient lookup menu to display patient bill
 void findPatient(void){
     int patientID;
     int index;
@@ -552,6 +553,18 @@ void displayPatientsByPriority(void){
             }
         }
     }
+
+    //displaying the patients by priority
+
+    for(int i = 0; i < patientCount; i++){
+        int index = order[i];
+
+        printf("\nPatient ID: PAT-%d", 1001 + index);
+        printf("\nName: %s", patientName[index]);
+        printf("\nUrgency Level: %d", urgencyLevel[index]);
+        printf("\nSpecialty: %s", specialtyName[specialtyRequested[index] - 1]);
+        printf("\nFinal Payable: %.2f\n", finalPayable[index]);
+    }
 }
 
 int main(void)
@@ -566,7 +579,8 @@ int main(void)
         printf("===============================================\n");
         printf("1. Register Patient\n");
         printf("2. Display Patient Bill\n");
-        printf("3. Exit\n");
+        printf("3. Display Patients by Priority\n");
+        printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -577,11 +591,14 @@ int main(void)
             findPatient();
         }
         else if(choice == 3){
+            displayPatientsByPriority();
+        }
+        else if(choice == 4){
             printf("You are exiting the system...\n");
             break;
         }
         else{
-            printf("\nInvalid choice. Please select 1 or 2.\n");
+            printf("\nInvalid choice. Please select a valid choice.\n");
         }
     }
     //displaySpecialties();
