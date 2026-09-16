@@ -104,6 +104,7 @@ double calculatingSubsidyDiscount(double gross, int age);
 
 void calculatingBill(int index);
 void displayPatientBill(int index);
+void findPatient(void);
 
 
 //Display doctor specialties
@@ -356,6 +357,7 @@ void displayPatientBill(int index){
     printf("============================================================\n");
 } 
 
+
 //register patient inputss
 void registerPatient(int *patientCount){
     if (*patientCount >= MAX_PATIENTS){
@@ -510,6 +512,47 @@ specialtyRequested[*patientCount] = specialtyChoice;
 
 }
 
+//Patient lookup menu 
+void findPatient(void){
+    int patientID;
+    int index;
+
+    printf("\nEnter Patient ID: PAT-");
+    scanf("%d", &patientID);
+
+    index = patientID - 1001;
+
+    if(index < 0 || index >= patientCount){
+        printf("\nPatient not found.\n");
+        return;
+    }
+
+    displayPatientBill(index);
+
+}
+
+//display patients by priority
+void displayPatientsByPriority(void){
+    int order[MAX_PATIENTS];
+
+    if(patientCount == 0){
+        printf("\nNo patients are registered.\n");
+        return;
+    }
+
+    for(int i = 0; i < patientCount; i++){
+        order[i] = i;
+    }
+    for(int i = 0; i < patientCount - 1; i++){
+        for(int j = 0; j < patientCount - 1 - i; j++){
+            if(urgencyLevel[order[j]] < urgencyLevel[order[j + 1]]){
+                int temp = order[j];
+                order[j] = order[j + 1];
+                order[j + 1] = temp;
+            }
+        }
+    }
+}
 
 int main(void)
 {
@@ -522,7 +565,8 @@ int main(void)
         printf("              MAIN MENU\n");
         printf("===============================================\n");
         printf("1. Register Patient\n");
-        printf("2. Exit\n");
+        printf("2. Display Patient Bill\n");
+        printf("3. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -530,7 +574,10 @@ int main(void)
             registerPatient(&patientCount);
         }
         else if(choice == 2){
-            printf("\nExiting system...\n");
+            findPatient();
+        }
+        else if(choice == 3){
+            printf("You are exiting the system...\n");
             break;
         }
         else{
