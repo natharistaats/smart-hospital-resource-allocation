@@ -513,12 +513,35 @@ specialtyRequested[*patientCount] = specialtyChoice;
 
 int main(void)
 {
-    printf("Smart Hospital & Resource Allocation System\n");
-    displaySpecialties();
-    displayWards();
-    displayBedAvailability();
+    int choice;
 
-    registerPatient(&patientCount);
+    printf("Smart Hospital & Resource Allocation System\n");
+
+    while(1){
+        printf("\n===============================================\n");
+        printf("              MAIN MENU\n");
+        printf("===============================================\n");
+        printf("1. Register Patient\n");
+        printf("2. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if(choice == 1){
+            registerPatient(&patientCount);
+        }
+        else if(choice == 2){
+            printf("\nExiting system...\n");
+            break;
+        }
+        else{
+            printf("\nInvalid choice. Please select 1 or 2.\n");
+        }
+    }
+    //displaySpecialties();
+    //displayWards();
+    //displayBedAvailability();
+
+    //registerPatient(&patientCount);
 
     printf("\nTotal registered patients: %d\n", patientCount);
 
