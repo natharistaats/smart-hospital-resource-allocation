@@ -109,6 +109,7 @@ void displayPatientsByPriority(void);
 void generateReport(void);
 
 void saveBedStatus(void);
+void loadBedStatus(void);
 
 
 //Display doctor specialties
@@ -647,7 +648,8 @@ void generateReports(void){
 }
 
 //file handeling 
-//file handeling of bed occupancy
+//file handeling of bed occupancy 1
+//saving beds temporarily
 void saveBedStatus(void){
     FILE *file = fopen("beds_status.txt", "w");
 
@@ -668,12 +670,36 @@ void saveBedStatus(void){
     printf("Bed status saved successfully.\n");
 }
 
+//file handeling of bed occupancy 2
+//loading previous bed occupancy status
+void loadBedStatus(void){
+    FILE *file = fopen("beds_status.txt", "r");
+
+    if(file == NULL){
+        printf("No previous bed status was found. Starting with all beds available.\n");
+        return;
+    }
+
+    for(int i = 0; i < WARD_COUNT; i++){
+        for(int j = 0; j < bedCapacity[i]; j++){
+            fscanf(file, "%d", &bedOccupancy[i][j]);
+        }
+    }
+
+    fclose(file);
+
+    printf("Previous bed status loaded successfully.\n");
+}
+
 
 int main(void)
 {
     int choice;
 
     printf("Smart Hospital & Resource Allocation System\n");
+
+    //loading previous bed status
+    loadBedStatus();
 
     while(1){
         printf("\n===============================================\n");
