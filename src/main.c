@@ -110,6 +110,7 @@ void generateReport(void);
 
 void saveBedStatus(void);
 void loadBedStatus(void);
+void savePatientRecord(int index);
 
 
 //Display doctor specialties
@@ -509,6 +510,9 @@ specialtyRequested[*patientCount] = specialtyChoice;
 
     specialtyQcount[specialtyIndex]++;
 
+    //calling the function to save the patient billing log in a file
+    savePatientRecord(*patientCount);
+
     (*patientCount)++;
 
     printf("\nPatient successfully registered.\n");
@@ -667,7 +671,7 @@ void saveBedStatus(void){
 
     fclose(file);
 
-    printf("Bed status saved successfully.\n");
+    printf("\nBed status saved successfully.\n");
 }
 
 //file handeling of bed occupancy 2
@@ -689,6 +693,41 @@ void loadBedStatus(void){
     fclose(file);
 
     printf("Previous bed status loaded successfully.\n");
+}
+
+//saving patients record in a file
+void savePatientRecord(int index){
+    FILE *file = fopen("patient_records.txt", "a");
+
+    if(file == NULL){
+        printf("Error. Could not save patient record.\n");
+        return;
+    }
+
+    int specialtyIndex = specialtyRequested[index] - 1;
+
+    fprintf(file, "\n=======================================\n");
+    fprintf(file, "Patient ID        : PAT-%d\n", 1001 + index);
+    fprintf(file, "Patient Name      : %s\n", patientName[index]);
+    fprintf(file, "Age               : %d\n", patientAge[index]);
+    fprintf(file, "Urgency Level     : %d\n", urgencyLevel[index]);
+    fprintf(file, "Specialty         : %s\n", specialtyName[specialtyIndex]);
+
+    if(isAdmitted[index] == 1){
+        int wardIndex = patientWard[index] - 1;
+
+        fprintf(file, "Ward              : %s\n", wardName[wardIndex]);
+        fprintf(file, "Days Admitted     : %d\n", daysAdmitted[index]);
+    }
+    else{
+        fprintf(file, "Ward            : Outpatient\n");
+    }
+
+    fprintf(file, "Gross Bill          : LKR %.2f\n", totalGross[index]);
+    fprintf(file, "Discount            : LKR %.2f\n", discount[index]);
+    fprintf(file, "Final Payable       : LKR %.2f\n", finalPayable[index]);
+
+    fclose(file);
 }
 
 
