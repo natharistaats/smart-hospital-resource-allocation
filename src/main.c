@@ -112,6 +112,10 @@ void saveBedStatus(void);
 void loadBedStatus(void);
 void savePatientRecord(int index);
 
+//I add this extra function to make the smart hospital system works smoothely
+//Patient discharge function
+void dischargePatient(void); 
+
 
 //Display doctor specialties
 void displaySpecialties(void){
@@ -730,7 +734,39 @@ void savePatientRecord(int index){
     fclose(file);
 }
 
+//discharge function
+void dischargePatient(void){
+    int patientID;
+    int index;
 
+    printf("\nEnter Patient ID: PAT-");
+    scanf("%d", &patientID);
+
+    index = patientID - 1001;
+
+    if(index < 0 || index >= patientCount){
+        printf("\nPatient not found.\n");
+        return;
+    }
+
+    if(isAdmitted[index] == 0){
+        printf("\nThis patient is an outpatient and has no assigned bed.\n");
+        return;
+    }
+
+    int wardIndex = patientWard[index] - 1;
+    int bedIndex = assignedBed[index];
+
+    bedOccupancy[wardIndex][bedIndex] = 0;
+
+    printf("\nPatient PAT-%d has beed discharge successfully.\n", patientID);
+    printf("Released Bed : %s, Bed #%02\n", wardName[wardIndex], bedIndex + 1);
+
+    isAdmitted[index] = 0;
+}
+
+
+//=================================================================================
 int main(void)
 {
     int choice;
@@ -748,7 +784,8 @@ int main(void)
         printf("2. Display Patient Bill\n");
         printf("3. Display Patients by Priority\n");
         printf("4. Performance reports & Analytics\n");
-        printf("5. Exit\n");
+        printf("5. Discharge Patient\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -765,6 +802,9 @@ int main(void)
             generateReports();
         }
         else if(choice == 5){
+            dischargePatient();
+        }
+        else if(choice == 6){
             saveBedStatus(); //saving bed status file when exiting the program
             printf("You are exiting the system...\n");
             break;
@@ -773,11 +813,6 @@ int main(void)
             printf("\nInvalid choice. Please select a valid choice.\n");
         }
     }
-    //displaySpecialties();
-    //displayWards();
-    //displayBedAvailability();
-
-    //registerPatient(&patientCount);
 
     printf("\nTotal registered patients: %d\n", patientCount);
 
