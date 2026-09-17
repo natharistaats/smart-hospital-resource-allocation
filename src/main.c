@@ -108,6 +108,8 @@ void findPatient(void); //to help display the patient bill by the patient number
 void displayPatientsByPriority(void);
 void generateReport(void);
 
+void saveBedStatus(void);
+
 
 //Display doctor specialties
 void displaySpecialties(void){
@@ -644,6 +646,28 @@ void generateReports(void){
 
 }
 
+//file handeling 
+//file handeling of bed occupancy
+void saveBedStatus(void){
+    FILE *file = fopen("beds_status.txt", "w");
+
+    if(file == NULL){
+        printf("Error. Could not save the bed status.\n");
+        return;
+    }
+
+    for(int i = 0; i < WARD_COUNT; i++){
+        for(int j = 0; j < bedCapacity[i]; j++){
+            fprintf(file, "%d ", bedOccupancy[i][j]);
+        }
+        fprintf(file, "\n");
+    }
+
+    fclose(file);
+
+    printf("Bed status saved successfully.\n");
+}
+
 
 int main(void)
 {
@@ -676,6 +700,7 @@ int main(void)
             generateReports();
         }
         else if(choice == 5){
+            saveBedStatus(); //saving bed status file when exiting the program
             printf("You are exiting the system...\n");
             break;
         }
