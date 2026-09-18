@@ -1,65 +1,6 @@
 =======================================
 Patient ID        : PAT-1001
-Patient Name      : Colin Morgan
-Age               : 33
-Urgency Level     : 1
-Specialty         : Cardiology
-Ward            : General Ward
-Days Admitted   : 5
-Gross Bill          : LKR 19500.00
-Discount            : LKR 0.00
-Final Payable       : LKR 19500.00
-=======================================
-Patient ID        : PAT-1002
-Patient Name      : Bradley Jamed
-Age               : 34
-Urgency Level     : 1
-Specialty         : Neurology
-Ward            : Paediatric Ward
-Days Admitted   : 3
-Gross Bill          : LKR 23000.00
-Discount            : LKR 0.00
-Final Payable       : LKR 23000.00
-=======================================
-Patient ID        : PAT-1001
-Patient Name      : katy watson
-Age               : 72
-Urgency Level     : 1
-Specialty         : Paediatrics
-Ward            : Outpatient
-Gross Bill          : LKR 2500.00
-Discount            : LKR 375.00
-Final Payable       : LKR 2125.00
-
-
-
-=======================================
-Patient ID        : PAT-1001
-Patient Name      : nathari
-Age               : 21
-Urgency Level     : 1
-Specialty         : General Practice (OPD)
-Ward              : General Ward
-Days Admitted     : 1
-Gross Bill          : LKR 4500.00
-Discount            : LKR 0.00
-Final Payable       : LKR 4500.00
-
-=======================================
-Patient ID        : PAT-1001
-Patient Name      : calum
-Age               : 23
-Urgency Level     : 1
-Specialty         : General Practice (OPD)
-Ward              : General Ward
-Days Admitted     : 1
-Gross Bill          : LKR 4500.00
-Discount            : LKR 0.00
-Final Payable       : LKR 4500.00
-
-=======================================
-Patient ID        : PAT-1001
-Patient Name      : john
+Patient Name      : John
 Age               : 30
 Urgency Level     : 1
 Specialty         : General Practice (OPD)
@@ -70,33 +11,48 @@ Final Payable       : LKR 1500.00
 
 =======================================
 Patient ID        : PAT-1002
-Patient Name      : sarah
+Patient Name      : Sarah Sanderson
 Age               : 25
-Urgency Level     : 1
+Urgency Level     : 2
 Specialty         : General Practice (OPD)
-Ward            : Outpatient
-Gross Bill          : LKR 1500.00
+Ward            : Paediatric Ward
+Days Admitted   : 2
+Gross Bill          : LKR 13800.00
 Discount            : LKR 0.00
-Final Payable       : LKR 1500.00
+Final Payable       : LKR 13800.00
 
 =======================================
 Patient ID        : PAT-1003
-Patient Name      : david
-Age               : 40
-Urgency Level     : 2
-Specialty         : General Practice (OPD)
+Patient Name      : David Witmore
+Age               : 70
+Urgency Level     : 3
+Specialty         : ICU (Intensive Care Unit)
+Days Admitted     : 3
 Ward            : Outpatient
-Gross Bill          : LKR 1800.00
-Discount            : LKR 0.00
-Final Payable       : LKR 1800.00
+Gross Bill          : LKR 82500.00
+Discount            : LKR 12375.00
+Final Payable       : LKR 70125.00
 
 =======================================
 Patient ID        : PAT-1001
-Patient Name      : John Murray
-Age               : 30
-Urgency Level     : 1
+Patient Name      : Calum Turner
+Age               : 4
+Urgency Level     : 2
 Specialty         : General Practice (OPD)
-Ward            : Outpatient
-Gross Bill          : LKR 1500.00
+Ward              : General Ward
+Days Admitted     : 2
+Gross Bill          : LKR 7800.00
+Discount            : LKR 1170.00
+Final Payable       : LKR 6630.00
+
+=======================================
+Patient ID        : PAT-1002
+Patient Name      : Sofie Watson
+Age               : 54
+Urgency Level     : 1
+Specialty         : Cardiology
+Ward              : General Ward
+Days Admitted     : 5
+Gross Bill          : LKR 19500.00
 Discount            : LKR 0.00
-Final Payable       : LKR 1500.00
+Final Payable       : LKR 19500.00
